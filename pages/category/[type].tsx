@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { IMAGE_MAP_WITH_TYPE } from "../../utils/data";
+import Template from "../../components/TemplateImage";
 
 export default () => {
   const router = useRouter();
@@ -11,7 +12,6 @@ export default () => {
 
   useEffect(() => {
     const images = IMAGE_MAP_WITH_TYPE.get(type as string);
-    console.log("images: ", images);
     if (images) {
       setCategoryImages(images);
     }
@@ -20,17 +20,13 @@ export default () => {
   return (
     <section className='mt-4'>
       <h1>{type}</h1>
-      <div className='container'>
+      <ul className='container'>
         {categoryImages.map((image) => (
-          <Image
-            key={image}
-            width='200'
-            height='200'
-            src={`/template/${image}.jpg`}
-            alt='template'
-          />
+          <li key={image}>
+            <Template src={image} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 };
