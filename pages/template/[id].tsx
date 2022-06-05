@@ -8,7 +8,7 @@ interface IProps {
 /**
  * 模版编辑页面，包含了模板大类，小类 type.id
  */
-export default (props: IProps) => {
+export default function Template(props: IProps) {
   const router = useRouter();
   const { id } = router.query;
   const { type } = props;

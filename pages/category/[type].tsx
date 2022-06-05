@@ -4,7 +4,7 @@ import Image from "next/image";
 import { IMAGE_MAP_WITH_TYPE } from "../../utils/data";
 import Template from "../../components/TemplateImage";
 
-export default () => {
+export default function Type()  {
   const router = useRouter();
   const { type } = router.query;
 
@@ -13,6 +13,7 @@ export default () => {
   useEffect(() => {
     const images = IMAGE_MAP_WITH_TYPE.get(type as string);
     if (images) {
+      // @ts-ignore
       setCategoryImages(images);
     }
   }, [type]);

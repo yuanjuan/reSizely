@@ -5,12 +5,12 @@ interface ITemplate {
   src: string;
 }
 
-export default (props: ITemplate) => {
+export default function TemplateImage(props: ITemplate) {
   const {src} = props
   return (
     <>
       <Link href={`/template/${src}`}>
-        <Image width={300} height={300} src={`/template/${src}.jpg`} />
+        <Image width={300} height={300} src={`/images/${src}.jpg`} />
       </Link>
     </>
   );
