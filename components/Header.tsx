@@ -8,6 +8,11 @@ import Link from "next/link";
 export default function Header() {
 	return (
 		<ul className="flex flex-row">
+      <li className="px-6 py-3">
+				<Link href="/">
+				Index
+				</Link>
+			</li>
 			<li className="px-6 py-3">
 				<Link href="/category/tops">
 				Tops

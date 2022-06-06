@@ -4,24 +4,23 @@ import Image from "next/image";
 import { IMAGE_MAP_WITH_TYPE } from "../../utils/data";
 import Template from "../../components/TemplateImage";
 
-export default function Type()  {
+export default () => {
   const router = useRouter();
   const { type } = router.query;
 
-  const [categoryImages, setCategoryImages] = useState([]);
+  const [categoryImages, setCategoryImages] = useState<string[]>([]);
 
   useEffect(() => {
     const images = IMAGE_MAP_WITH_TYPE.get(type as string);
     if (images) {
-      // @ts-ignore
-      setCategoryImages(images);
+      setCategoryImages(images as string[]);
     }
   }, [type]);
 
   return (
-    <section className='mt-4'>
+    <section className='pt-4'>
       <h1>{type}</h1>
-      <ul className='container'>
+      <ul className='container grid grid-cols-3 justify-evenly justify-items-center'>
         {categoryImages.map((image) => (
           <li key={image}>
             <Template src={image} />
