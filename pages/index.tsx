@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   <section className='pt-4'>
     <ul className='container grid grid-cols-4'>
       {images.map((image) => (
-          <li key={image}>
+          <li key={image} className='px-1'>
             <TemplateImage src={image} />
           </li>
         ))}

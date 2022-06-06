@@ -22,7 +22,7 @@ export default () => {
       <h1>{type}</h1>
       <ul className='container grid grid-cols-4'>
         {categoryImages.map((image) => (
-          <li key={image}>
+          <li key={image} className='px-2'>
             <Template src={image} />
           </li>
         ))}
