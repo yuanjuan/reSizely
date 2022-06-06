@@ -12,9 +12,9 @@ const Home: NextPage = () => {
 
   return (
   <section className='pt-4'>
-    <ul className='container grid grid-cols-4'>
+    <ul className='container grid grid-cols-3 justify-evenly justify-items-center'>
       {images.map((image) => (
-          <li key={image} className='px-1'>
+          <li key={image}>
             <TemplateImage src={image} />
           </li>
         ))}

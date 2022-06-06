@@ -20,9 +20,9 @@ export default () => {
   return (
     <section className='pt-4'>
       <h1>{type}</h1>
-      <ul className='container grid grid-cols-4'>
+      <ul className='container grid grid-cols-3 justify-evenly justify-items-center'>
         {categoryImages.map((image) => (
-          <li key={image} className='px-2'>
+          <li key={image}>
             <Template src={image} />
           </li>
         ))}
