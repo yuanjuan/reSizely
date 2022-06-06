@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Controller from "../../components/Controller";
 
 interface IProps {
   type: string;
@@ -14,9 +15,8 @@ export default function Template(props: IProps) {
   const { type } = props;
 
   return (
-    <section>
-      <h1>当前类型: {type}</h1>
-      <div>TOP CONTROL</div>
+    <section className="container gap-8 columns-1">
+      <Controller />
       <Image src={`/images/${id}.jpg`} width={400} height={400} />
       <div>CONFIG TABLE</div>
     </section>
