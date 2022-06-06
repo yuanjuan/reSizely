@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Controller from "../../components/Controller";
+import EditableTable from "../../components/EditableTable";
 
 interface IProps {
   type: string;
@@ -18,7 +19,7 @@ export default function Template(props: IProps) {
     <section className="container gap-8 columns-1">
       <Controller />
       <Image src={`/images/${id}.jpg`} width={400} height={400} />
-      <div>CONFIG TABLE</div>
+      <EditableTable />
     </section>
   );
 };
