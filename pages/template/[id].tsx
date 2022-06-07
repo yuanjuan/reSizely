@@ -37,6 +37,7 @@ export default function Template(props: IProps) {
   // 新增行, key值可以有更好的方案，比如自增数字，或者uuid
   const add = () => {
     const newTableBody = cloneDeep(tableBody)
+    // TODO: there are better way to generate n data
     newTableBody.push([{key: 10}, {key: 11}, {key: 12}, {key: 13}])
     setTableBody(newTableBody)
   }

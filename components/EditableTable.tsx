@@ -1,5 +1,5 @@
+import { findIndex } from "lodash";
 import React, { ChangeEvent } from "react";
-import { renderIntoDocument } from "react-dom/test-utils";
 
 /**
  * cell元素具体内容，此处为动态的列名
@@ -27,6 +27,7 @@ interface IHeaderCellProps {
 
 interface IBodyCellProps {
   key: string | number;
+  value?: string | number;
 }
 
 interface IEditableProps {
@@ -48,8 +49,15 @@ const EditableTable = (props: IEditableProps) => {
     key: string | number,
     type: "CUSTOM" | "BODY"
   ) => {
-    // TODO: 更新输入的单元格数据
-    console.log("input value: ", e.target.value, key);
+    // TODO: 更新数据源， 目标数据源为二维数组的某个数据
+    for (let i =0; i < body.length; i++ ) {
+      const _index = findIndex(body[i], ({key: _k}) => _k === key)
+      if (_index !== -1) {
+        body[i][_index] = {key: body[i][_index].key, value: e.target.value}
+      }
+    }
+
+    console.log('body update: ', body)
   };
 
   return (
