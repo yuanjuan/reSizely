@@ -21,6 +21,7 @@ export default function Template(props: IProps) {
   const { id } = router.query;
 
   // table header css
+  // 这个数据是跟图片类型绑定的，需要写到配置里，前期可以模拟
   const header = [
     { key: 1, name: "袖长" },
     { key: 2, name: "肩宽" },
