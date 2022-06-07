@@ -52,34 +52,36 @@ const EditableTable = (props: IEditableProps) => {
   };
 
   return (
-    <table className="table-auto container">
-      <thead>
-        <tr>
-          <th>0</th>
-          <th>
-            <input type="text" placeholder="Custom" />
-          </th>
-          {header.map(({ key, name }, index) => (
-            <th key={key}>{name}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <input type="text" />
-          </td>
-          <td>
-            <input type="text" />
-          </td>
-          {body.map(({ key }, index) => (
-            <td key={key}>
-              <input type="text" onChange={(e) => save(e, key)} />
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>0</th>
+            <th>
+              <input type="text" placeholder="Custom" />
+            </th>
+            {header.map(({ key, name }, index) => (
+              <th key={key}>{name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" />
             </td>
-          ))}
-        </tr>
-      </tbody>
-    </table>
+            <td>
+              <input type="text" />
+            </td>
+            {body.map(({ key }, index) => (
+              <td key={key}>
+                <input type="text" onChange={(e) => save(e, key)} />
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
