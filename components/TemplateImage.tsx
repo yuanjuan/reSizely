@@ -3,10 +3,14 @@ import Link from "next/link";
 
 interface ITemplate {
   src: string;
+  feature: string[];
 }
 
 export default function TemplateImage(props: ITemplate) {
-  const {src} = props
+  const {src, feature} = props
+  
+  // 传递数据到模版页面，用来渲染尺码标维度
+  // 如何利用Context来传递数据到子组件
   return (
     <>
       <Link href={`/template/${src}`}>
