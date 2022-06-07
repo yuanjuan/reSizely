@@ -1,4 +1,4 @@
-import React, { FormEventHandler } from "react";
+import React, { ChangeEvent } from "react";
 import { renderIntoDocument } from "react-dom/test-utils";
 
 /**
@@ -44,11 +44,12 @@ const EditableTable = (props: IEditableProps) => {
   const { header, body } = props;
 
   const save = (
-    e: FormEventHandler<HTMLInputElement>,
-    key: string | number
+    e: ChangeEvent<HTMLInputElement>,
+    key: string | number,
+    type: "CUSTOM" | "BODY"
   ) => {
-    // 更新输入的单元格数据
-    console.log("xxx", e.target.value, key);
+    // TODO: 更新输入的单元格数据
+    console.log("input value: ", e.target.value, key);
   };
 
   return (
@@ -56,26 +57,24 @@ const EditableTable = (props: IEditableProps) => {
       <table>
         <thead>
           <tr>
-            <th>0</th>
+            <th></th>
             <th>
-              <input type="text" placeholder="Custom" />
+              <input
+                type="text"
+                placeholder="Custom"
+                onChange={(e) => save(e, "custom", "CUSTOM")}
+              />
             </th>
-            {header.map(({ key, name }, index) => (
+            {header.map(({ key, name }) => (
               <th key={key}>{name}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
-              <input type="text" />
-            </td>
-            <td>
-              <input type="text" />
-            </td>
-            {body.map(({ key }, index) => (
+            {body.map(({ key }) => (
               <td key={key}>
-                <input type="text" onChange={(e) => save(e, key)} />
+                <input type="text" onChange={(e) => save(e, key, "BODY")} />
               </td>
             ))}
           </tr>

@@ -21,13 +21,14 @@ export default function Template(props: IProps) {
     { key: 2, name: "肩宽" },
   ];
 
-  const body = [{ key: 1 }, { key: 2 }];
+  const body = [{key: 0}, {key: 'custom'}, { key: 1 }, { key: 2 }];
 
   return (
     <section className="container gap-8 columns-1">
       <Controller />
       <Image src={`/images/${id}.jpg`} width={400} height={400} />
       <EditableTable header={header} body={body} />
+      <button className="py-3 px-10 rounded-full bg-sky-500 text-white my-4">Generate</button>
     </section>
   );
 }
