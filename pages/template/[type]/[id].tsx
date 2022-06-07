@@ -54,13 +54,17 @@ export default function Template(props: IProps) {
     setTableBody(newTableBody);
   };
 
+  const update = (value: any) => {
+    console.log("update value", value);
+  };
+
   return (
     <section className="container gap-8 columns-1">
       <Controller />
       <Image src={`/images/${id}.jpg`} width={400} height={400} />
       <section>
         <button onClick={add}>Add</button>
-        <EditableTable header={tableHeader} body={tableBody} />
+        <EditableTable header={tableHeader} body={tableBody} update={update} />
       </section>
       <button className="py-3 px-10 rounded-full bg-sky-500 text-white my-4">
         Generate

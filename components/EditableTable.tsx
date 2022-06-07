@@ -35,6 +35,7 @@ interface IBodyCellProps {
 interface IEditableProps {
   header: IHeaderCellProps[];
   body: IBodyCellProps[][];
+  update: (v: any) => void;
 }
 
 /**
@@ -44,7 +45,7 @@ interface IEditableProps {
  * @constructor
  */
 const EditableTable = (props: IEditableProps) => {
-  const { header, body } = props;
+  const { header, body, update } = props;
 
   const save = debounce(
     (
@@ -58,6 +59,8 @@ const EditableTable = (props: IEditableProps) => {
           body[i][_index] = { key: body[i][_index].key, value: e.target.value };
         }
       }
+
+      update([...body, header]);
     },
     350
   );
