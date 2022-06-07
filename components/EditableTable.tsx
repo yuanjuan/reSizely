@@ -23,11 +23,13 @@ interface EditableCellProps {
 interface IHeaderCellProps {
   key: string | number;
   name: string;
+  type?: string;
 }
 
 interface IBodyCellProps {
   key: string | number;
   value?: string | number;
+  type?: string;
 }
 
 interface IEditableProps {
@@ -44,22 +46,21 @@ interface IEditableProps {
 const EditableTable = (props: IEditableProps) => {
   const { header, body } = props;
 
-  // debounce the call
-  const save = debounce((
-    e: ChangeEvent<HTMLInputElement>,
-    key: string | number,
-    type: "CUSTOM" | "BODY"
-  ) => {
-    // TODO: 更新数据源， 目标数据源为二维数组的某个数据
-    for (let i =0; i < body.length; i++ ) {
-      const _index = findIndex(body[i], ({key: _k}) => _k === key)
-      if (_index !== -1) {
-        body[i][_index] = {key: body[i][_index].key, value: e.target.value}
+  const save = debounce(
+    (
+      e: ChangeEvent<HTMLInputElement>,
+      key: string | number,
+      type: "CUSTOM" | "BODY"
+    ) => {
+      for (let i = 0; i < body.length; i++) {
+        const _index = findIndex(body[i], ({ key: _k }) => _k === key);
+        if (_index !== -1) {
+          body[i][_index] = { key: body[i][_index].key, value: e.target.value };
+        }
       }
-    }
-
-    console.log('body update: ', body)
-  }, 350);
+    },
+    350
+  );
 
   return (
     <div>
@@ -67,16 +68,19 @@ const EditableTable = (props: IEditableProps) => {
         <thead>
           <tr>
             <th></th>
-            <th>
-              <input
-                type="text"
-                placeholder="Custom"
-                onChange={(e) => save(e, "custom", "CUSTOM")}
-              />
-            </th>
-            {header.map(({ key, name }) => (
-              <th key={key}>{name}</th>
-            ))}
+            {header.map(({ key, name }) =>
+              name === "custom" ? (
+                <th key={key}>
+                  <input
+                    type="text"
+                    placeholder="Custom"
+                    onChange={(e) => save(e, "custom", "CUSTOM")}
+                  />
+                </th>
+              ) : (
+                <th key={key}>{name}</th>
+              )
+            )}
           </tr>
         </thead>
         <tbody>
