@@ -31,7 +31,7 @@ interface IBodyCellProps {
 
 interface IEditableProps {
   header: IHeaderCellProps[];
-  body: IBodyCellProps[];
+  body: IBodyCellProps[][];
 }
 
 /**
@@ -71,13 +71,15 @@ const EditableTable = (props: IEditableProps) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {body.map(({ key }) => (
-              <td key={key}>
-                <input type="text" onChange={(e) => save(e, key, "BODY")} />
-              </td>
-            ))}
-          </tr>
+          {body.map((item, index) => (
+            <tr key={index}>
+              {item.map(({ key }) => (
+                <td key={key}>
+                  <input type="text" onChange={(e) => save(e, key, "BODY")} />
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
