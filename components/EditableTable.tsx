@@ -1,4 +1,4 @@
-import { findIndex } from "lodash";
+import { debounce, findIndex } from "lodash";
 import React, { ChangeEvent } from "react";
 
 /**
@@ -44,7 +44,8 @@ interface IEditableProps {
 const EditableTable = (props: IEditableProps) => {
   const { header, body } = props;
 
-  const save = (
+  // debounce the call
+  const save = debounce((
     e: ChangeEvent<HTMLInputElement>,
     key: string | number,
     type: "CUSTOM" | "BODY"
@@ -58,7 +59,7 @@ const EditableTable = (props: IEditableProps) => {
     }
 
     console.log('body update: ', body)
-  };
+  }, 350);
 
   return (
     <div>
