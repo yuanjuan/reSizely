@@ -20,7 +20,7 @@ export default function Template(props: IProps) {
   const router = useRouter();
   const { id, type } = router.query;
 
-  const [unit, setUnit] = useState<string>('')
+  const [unit, setUnit] = useState<string>("");
   const [tableBody, setTableBody] = useState<any>([]);
   const [tableHeader, setTableHeader] = useState<any>([]);
 
@@ -28,7 +28,11 @@ export default function Template(props: IProps) {
     // @ts-ignore
     const header = IMAGE_MAP_WITH_TYPE.get(type as string)
       .find((item: any) => item.imageType === id)
-      .feature.map((f: any, index: number) => ({ name: f, key: index, type: 'feature' }));
+      .feature.map((f: any, index: number) => ({
+        name: f,
+        key: index,
+        type: "feature",
+      }));
 
     const body = Array(header.length + 2)
       .fill(0)
@@ -37,7 +41,7 @@ export default function Template(props: IProps) {
       });
 
     // add custom header to the header
-    header.unshift({ key: count++, name: "custom", type: 'feature' });
+    header.unshift({ key: count++, name: "custom", type: "feature" });
     setTableHeader(header);
     setTableBody([body]);
   }, [type]);
@@ -56,18 +60,19 @@ export default function Template(props: IProps) {
   };
 
   const update = (value: any) => {
-    const [bodyValues, headerValues] = value
-    setTableBody(bodyValues)
-    setTableHeader(headerValues)
+    const [bodyValues, headerValues] = value;
+    setTableBody(bodyValues);
+    setTableHeader(headerValues);
   };
 
   const generate = () => {
-    console.log('generate: ', tableBody, tableHeader, unit)
-  }
+    console.log("generate: ", tableBody, tableHeader, unit);
+    router.push("/output/10");
+  };
 
   const switchFn = (value: string) => {
-    setUnit(value)
-  }
+    setUnit(value);
+  };
 
   return (
     <section className="container gap-8 columns-1">
@@ -77,7 +82,10 @@ export default function Template(props: IProps) {
         <button onClick={add}>Add</button>
         <EditableTable header={tableHeader} body={tableBody} update={update} />
       </section>
-      <button onClick={generate} className="py-3 px-10 rounded-full bg-sky-500 text-white my-4">
+      <button
+        onClick={generate}
+        className="py-3 px-10 rounded-full bg-sky-500 text-white my-4"
+      >
         Generate
       </button>
     </section>
