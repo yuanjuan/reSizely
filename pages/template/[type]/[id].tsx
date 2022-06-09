@@ -20,6 +20,7 @@ export default function Template(props: IProps) {
   const router = useRouter();
   const { id, type } = router.query;
 
+  const [unit, setUnit] = useState<string>('')
   const [tableBody, setTableBody] = useState<any>([]);
   const [tableHeader, setTableHeader] = useState<any>([]);
 
@@ -27,7 +28,7 @@ export default function Template(props: IProps) {
     // @ts-ignore
     const header = IMAGE_MAP_WITH_TYPE.get(type as string)
       .find((item: any) => item.imageType === id)
-      .feature.map((f: any, index: number) => ({ name: f, key: index }));
+      .feature.map((f: any, index: number) => ({ name: f, key: index, type: 'feature' }));
 
     const body = Array(header.length + 2)
       .fill(0)
@@ -36,7 +37,7 @@ export default function Template(props: IProps) {
       });
 
     // add custom header to the header
-    header.unshift({ key: count++, name: "custom" });
+    header.unshift({ key: count++, name: "custom", type: 'feature' });
     setTableHeader(header);
     setTableBody([body]);
   }, [type]);
@@ -55,25 +56,35 @@ export default function Template(props: IProps) {
   };
 
   const update = (value: any) => {
-    console.log("update value", value);
+    const [bodyValues, headerValues] = value
+    setTableBody(bodyValues)
+    setTableHeader(headerValues)
   };
+
+  const generate = () => {
+    console.log('generate: ', tableBody, tableHeader, unit)
+  }
+
+  const switchFn = (value: string) => {
+    setUnit(value)
+  }
 
   return (
     <section className="container gap-8 columns-1">
-      <Controller />
+      <Controller onSwitch={switchFn} />
       <Image src={`/images/${id}.jpg`} width={400} height={400} />
       <section>
         <button onClick={add}>Add</button>
         <EditableTable header={tableHeader} body={tableBody} update={update} />
       </section>
-      <button className="py-3 px-10 rounded-full bg-sky-500 text-white my-4">
+      <button onClick={generate} className="py-3 px-10 rounded-full bg-sky-500 text-white my-4">
         Generate
       </button>
     </section>
   );
 }
 
-// why should add this?
+// what did this used for
 export async function getServerSideProps() {
   return {
     props: {},

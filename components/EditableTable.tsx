@@ -60,7 +60,7 @@ const EditableTable = (props: IEditableProps) => {
         }
       }
 
-      update([...body, header]);
+      update([body, header]);
     },
     350
   );
