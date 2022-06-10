@@ -68,6 +68,8 @@ export default function Template(props: IProps) {
   const generate = () => {
     // TODO: call api to get some date to render the next page
     console.log("generate: ", tableBody, tableHeader, unit);
+
+    // TODO: 把数据给后台，返回一个id，到下一个页面，通过id获取对应的数据
     router.push("/output/10");
   };
 
