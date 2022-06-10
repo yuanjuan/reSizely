@@ -72,10 +72,10 @@ export default function Template(props: IProps) {
     console.log("generate: ", tableBody, tableHeader, unit);
 
     // TODO: 把数据给后台，返回一个id，到下一个页面，通过id获取对应的数据
-    request("/output/1").then((res) => {
+    request("/templates/1").then((res) => {
       const { id, url } = res;
       console.log("res: ", res, id, url);
-      router.push(`/template/${id}`);
+      router.push(`/output/${id}`);
     });
   }, [tableBody, tableHeader, unit]);
 
