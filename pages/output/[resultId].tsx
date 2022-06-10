@@ -1,5 +1,15 @@
 const Result = (props: any) => {
-  return <h1>Result</h1>;
+  <>
+    <section>
+      <p>size chart url</p>
+    </section>
+    <section>
+      <p>Dynamic size Chart</p>
+    </section>
+    <section>
+      Preview
+    </section>
+  </>
 };
 
 export default Result;

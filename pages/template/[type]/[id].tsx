@@ -66,6 +66,7 @@ export default function Template(props: IProps) {
   };
 
   const generate = () => {
+    // TODO: call api to get some date to render the next page
     console.log("generate: ", tableBody, tableHeader, unit);
     router.push("/output/10");
   };
