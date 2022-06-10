@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cloneDeep } from "lodash";
 
 import Controller from "../../../components/Controller";
 import EditableTable from "../../../components/EditableTable";
 import { IMAGE_MAP_WITH_TYPE } from "../../../utils/data";
+import request from "../../../lib/request";
+import useSWR from "swr";
 
 interface IProps {
   type: string;
@@ -65,13 +67,17 @@ export default function Template(props: IProps) {
     setTableHeader(headerValues);
   };
 
-  const generate = () => {
+  const generate = useCallback(() => {
     // TODO: call api to get some date to render the next page
     console.log("generate: ", tableBody, tableHeader, unit);
 
     // TODO: 把数据给后台，返回一个id，到下一个页面，通过id获取对应的数据
-    router.push("/output/10");
-  };
+    request("/output/1").then((res) => {
+      const { id, url } = res;
+      console.log("res: ", res, id, url);
+      router.push(`/template/${id}`);
+    });
+  }, [tableBody, tableHeader, unit]);
 
   const switchFn = (value: string) => {
     setUnit(value);
