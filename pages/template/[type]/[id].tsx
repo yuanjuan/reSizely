@@ -8,9 +8,15 @@ import EditableTable from "../../../components/EditableTable";
 import { IMAGE_MAP_WITH_TYPE } from "../../../utils/data";
 import request from "../../../lib/request";
 import useSWR from "swr";
+import { AxiosResponse } from "axios";
 
 interface IProps {
   type: string;
+}
+
+interface ITemplateApi {
+  id: string;
+  url?: string
 }
 
 let count = 0;
@@ -72,7 +78,8 @@ export default function Template(props: IProps) {
     console.log("generate: ", tableBody, tableHeader, unit);
 
     // TODO: 把数据给后台，返回一个id，到下一个页面，通过id获取对应的数据
-    request("/templates/1").then((res) => {
+    // @ts-ignore 这种类型要怎么写呢？
+    request("/templates/1").then((res: ITemplateApi) => {
       const { id, url } = res;
       console.log("res: ", res, id, url);
       router.push(`/output/${id}`);
