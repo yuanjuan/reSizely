@@ -6,7 +6,7 @@ const Result = (props: any) => {
   const router = useRouter();
   const { resultId } = router.query;
 
-  const { data, error, isValidating } = useSWR(`/output/${resultId}`);
+  const { data, error } = useSWR(`/output/${resultId}`);
 
   // TODO: 做一个loading页面，暂时只有这里需要LoadinU
   return !data && !error ? (
@@ -17,23 +17,15 @@ const Result = (props: any) => {
         <p className="py-2">size chart url</p>
         <p className="py-4">{data.url}</p>
         <div className="flex justify-between max-w-md m-auto">
-          <button className="px-6 py-2 border-2 border-indigo-100 rounded-full">
-            Copy URL
-          </button>
-          <button className="px-6 py-2 border-2 border-indigo-100 rounded-full">
-            Copy HTML
-          </button>
-          <button className="px-6 py-2 border-2 border-indigo-100 rounded-full">
-            Save Image
-          </button>
+          <button className="btn-primary">Copy URL</button>
+          <button className="btn-primary">Copy HTML</button>
+          <button className="btn-primary">Save Image</button>
         </div>
       </section>
       <section className="my-3">
         <p>Dynamic size Chart</p>
         <p className="py-4">{data.url}</p>
-        <button className="px-6 py-2 border-2 border-indigo-100 rounded-full">
-          Copy Code
-        </button>
+        <button className="btn-primary">Copy Code</button>
       </section>
       <section>
         <p className="my-3">Preview</p>
@@ -44,6 +36,7 @@ const Result = (props: any) => {
 };
 
 // what did this used for
+// why add this on dynamic page will resolve the problem
 export async function getServerSideProps() {
   return {
     props: {},

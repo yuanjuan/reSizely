@@ -7,8 +7,6 @@ import Controller from "../../../components/Controller";
 import EditableTable from "../../../components/EditableTable";
 import { IMAGE_MAP_WITH_TYPE } from "../../../utils/data";
 import request from "../../../lib/request";
-import useSWR from "swr";
-import { AxiosResponse } from "axios";
 
 interface IProps {
   type: string;
@@ -16,7 +14,7 @@ interface IProps {
 
 interface ITemplateApi {
   id: string;
-  url?: string
+  url?: string;
 }
 
 let count = 0;
@@ -98,10 +96,7 @@ export default function Template(props: IProps) {
         <button onClick={add}>Add</button>
         <EditableTable header={tableHeader} body={tableBody} update={update} />
       </section>
-      <button
-        onClick={generate}
-        className="py-3 px-10 rounded-full bg-sky-500 text-white my-4"
-      >
+      <button onClick={generate} className="btn-primary">
         Generate
       </button>
     </section>
