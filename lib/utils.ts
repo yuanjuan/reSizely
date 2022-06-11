@@ -36,6 +36,7 @@ function copyTextToClipboard(text: any) {
   }
   navigator.clipboard.writeText(text).then(
     function () {
+      console.log('xxxx')
       toast.success('Async: Copying to clipboard was successful!')
     },
     function (err) {

@@ -1,22 +1,23 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 // 区分环境
 const instance = axios.create({
-  baseURL: "https://mockend.com/ivanberry/reSizely",
-});
+  baseURL: 'https://mockend.com/ivanberry/reSizely',
+})
 
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    return config;
+    console.log('config: ', config)
+    return config
   },
   function (error) {
     // Do something with request error
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 // Add a response interceptor
 // response Schema
@@ -47,22 +48,22 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    const { status } = response;
+    const { status } = response
     if (status === 200) {
-      return Promise.resolve(response?.data);
+      return Promise.resolve(response?.data)
     } else {
-      toast.error(response?.data?.msg || "Error", {
+      toast.error(response?.data?.msg || 'Error', {
         position: toast.POSITION.TOP_CENTER,
-      });
+      })
     }
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    toast.error(error?.msg || "Error", {
+    toast.error(error?.msg || 'Error', {
       position: toast.POSITION.TOP_CENTER,
-    });
+    })
   }
-);
+)
 
-export { instance as default };
+export { instance as default }
