@@ -40,7 +40,7 @@ const Result = (props: any) => {
       </section>
       <section className="my-3">
         <p>Dynamic size Chart</p>
-        <p className="py-4">{data.url}</p>
+        <p className="py-4">{`<iframe src='${data.url}' style="display: block; border: 0; width:100%; height:100%"></iframe>`}</p>
         <button onClick={copy} className="btn-primary">
           Copy Code
         </button>
