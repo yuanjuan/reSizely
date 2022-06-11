@@ -3,9 +3,9 @@
  * @author Dean Taylor
  * @param text
  */
+import { toast } from "react-toastify";
 
 // TODO: fail to notice
-
 function fallbackCopyTextToClipboard(text: any) {
   let textArea = document.createElement("textarea");
   textArea.value = text;
@@ -21,9 +21,9 @@ function fallbackCopyTextToClipboard(text: any) {
   try {
     let successful = document.execCommand("copy");
     let msg = successful ? "successful" : "unsuccessful";
-    console.log("Fallback: Copying text command was " + msg);
+    toast.success("Fallback: Copying text command was " + msg);
   } catch (err) {
-    console.error("Fallback: Oops, unable to copy", err);
+    toast.error("Fallback: Oops, unable to copy " + err);
   }
 
   document.body.removeChild(textArea);
@@ -35,10 +35,10 @@ function copyTextToClipboard(text: any) {
   }
   navigator.clipboard.writeText(text).then(
     function () {
-      console.log("Async: Copying to clipboard was successful!");
+      toast.success("Async: Copying to clipboard was successful!");
     },
     function (err) {
-      console.error("Async: Could not copy text: ", err);
+      toast.error("Async: Could not copy text: ", err);
     }
   );
 }
